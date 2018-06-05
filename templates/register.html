@@ -1,0 +1,86 @@
+
+{% extends 'login.html' %}
+{% block title %}注册 | 学习在线{{% endblock %}
+{% load static %}
+{% load my_tag %}
+{% block tag %}用户注册{% endblock %}
+
+{% block content %}
+    <div class="fl form-box">
+
+        <div class="tab">
+            <h2>用户注册</h2>
+        </div>
+        <div class="tab-form">
+
+            <form id="email_register_form" method="post" action="{% url 'users:register' %}" autocomplete="off"
+                  novalidate enctype="multipart/form-data">
+
+                <div class="form-group marb20 {% if register_form.errors.username %}errorput{% endif %}">
+                    <label>用 户 名</label>
+                    <input type="text" id="id_email" name="username" autocomplete="On"/>
+                </div>
+
+                <div class="form-group marb8 {% if register_form.errors.password1 %}errorput{% endif %}">
+                    <label>密 码</label>
+                    <input type="password" id="id_password1" name="password1">
+                </div>
+
+                <div  class="form-group marb8 {% if register_form.errors.password2 %}errorput{% endif %}/
+{% if register_form.errors.all %}errorput{% endif %}">
+                    <label>确认密码</label>
+                    <input type="password"  name="password2" id="id_password2">
+                </div>
+
+            <img src="{% static 'img/default.png' %}" width="50" id="up_img">
+                 <div  class="form-group marb8">
+                    <label>用户图像上传</label>
+                    <input type="file"  name="avatar" id="file_choose">
+                </div>
+
+                <div class=" form-group marb8 captcha1 {% if register_form.errors.captcha %}errorput{% endif %}">
+                    <label>验 证 码</label>
+                    {{ register_form.captcha }}
+                </div>
+
+                <div class="error btns" id="jsEmailTips">{{ msg }}</div>
+
+                <div class="auto-box marb8">
+                </div>
+
+                <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="注册并登录"/>
+                {% csrf_token %}
+
+            </form>
+
+        </div>
+
+{#        <p class="form-p">已有账号？<a href="{% url 'users:login' %}">[立即登录]</a></p>#}
+
+    </div>
+
+{% endblock %}
+
+
+{% block custom_js %}
+<script>
+ // 必须导入Jquery模块，图片更新后动态显示
+    $('#file_choose').change(function () {
+            // 1. 找到已更换的图片路径
+            var reader = new FileReader();
+            // 2. 从input标签中找到上传的文件对象, [0]是找到DOM对象
+            var upload_file = $(this)[0].files[0];
+            // 3. 处理上传的图片路径
+            upload_file_url = reader.readAsDataURL(upload_file);
+            // 4. 给reader对象绑定load事件
+            reader.onload=function () {
+                // 5. 取出result对象,里面包含图路径, 赋值给img的src路径,
+                $('#up_img')[0].src = this.result
+            }
+    });
+
+</script>
+
+
+{% endblock %}
+

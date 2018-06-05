@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% block title  %}讲师详情 | 学习在线{% endblock %}
+
+{% block custom_css %}
+<style>
+{#　教师列表显示样式　#}
+.media img{
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+}
+.media-object{
+    margin-top: 0;
+    margin-left: 20px;
+}
+.media-body{
+{#    padding-top: 20px;#}
+}
+.media span{
+}
+.media li{
+    margin-bottom: 5px;
+}
+.media-left{
+    padding-right: 20px;
+}
+.thumbnail img{
+    width: 200px;
+}
+.media-body .row{
+    margin-bottom: 10px;
+}
+
+</style>
+
+{% endblock %}
+
+{% block bread %}
+<section>
+    <div class="wp">
+        <ul  class="crumbs">
+            <li><a href="{% url 'homepage' %}">首页</a>></li>
+            <li><a href="{% url 'teacher_list' %}">授课讲师</a>></li>
+            <li>讲师详情</li>
+        </ul>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block content %}
+<section>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-9" style="margin-left: -80px">
+
+                    {# 讲师详情 #}
+                    <div class="media">
+                          <div class="media-left">
+                            <a href="{% url 'orgs:teacher_detail' teacher.id %}">
+                              <img class="media-object" src="/media/{{ teacher.image }}" alt="..." width="180" height="180">
+                            </a>
+                          </div>
+                          <div class="media-body">
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span>姓名：<span class="desc_content">{{ teacher.name }}</span></span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span>年龄：<span class="desc_content">{{ teacher.age }}岁</span></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span class="second">工作年限：<span class="desc_content">{{ teacher.work_year }}</span>年</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span>当前职位：<span class="desc_content">{{ teacher.work_position }}</span></span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span class="second">就职公司：<span class="desc_content">{{ teacher.company }}</span></span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span>教学特点：<span class="desc_content">{{ teacher.introduction|truncatechars:'26' }}</span></span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <span>主讲课程：</span>
+                                          {% for course in teacher.course_set.all|slice:'3' %}
+                                              <span class="" style="color: #37b16f">
+                                                  <a href="{% url 'courses:course_detail' course.id %}">{{ course.name }}&nbsp;&nbsp;</a></span>
+                                          {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                          </div>
+                        </div>
+
+                    {# 讲师课程 #}
+                    <div class="butler_detail_cont clearfix">
+                        <div class="left layout">
+                        <div class="head">
+                            <ul class="tab_header">
+                                <li class="active"><a href="/diary/hk_detail/10/">全部课程</a> </li>
+                            </ul>
+                        </div>
+
+                         <div class="row">
+                            {% for course in teacher_courses %}
+                              <div class="col-md-3">
+                                <div class="thumbnail">
+                                  <a href="{% url 'courses:course_detail' course.id %}">
+                                      <img src="/media/{{ course.image }}" alt="..." width="200px">
+                                  </a>
+                                  <div class="caption">
+                                    <h3 style="font-size: 18px">{{ course.name }}</h3>
+                                      <span class="glyphicon glyphicon-facetime-video gl_str"></span>
+                                      <span class="">{{ course.learn_times }}分钟</span>&nbsp;&nbsp;&nbsp;
+                                      <span class="glyphicon glyphicon-user gl_str"></span>
+                                      <span>{{ course.students_num }}人</span>
+                                  </div>
+
+                                </div>
+                              </div>
+                            {% endfor %}
+                        </div>
+
+                </div>
+                </div>
+
+                </div>
+
+                <div class="col-md-3" style="margin-left: 60px">
+
+                    {#                教育机构 #}
+                    <div class="row" style="margin-top: -20px;margin-bottom: 20px">
+                          <div class="butler_detail_list">
+                             <div class="right butler-company-box" style="">
+
+                              <div class="thumbnail" style="height: 150px;margin-left: 30px">
+                                <a href="{% url 'orgs:org_homepage' org.id %}">
+                                    <img src="/media/{{ org.image }}" alt="...">
+                                </a>
+                                  <div class="caption" style="font-size: 14px">
+                                      <span class="glyphicon glyphicon-user">&nbsp{{ org.name }}</span>&nbsp;
+                                      <span class="glyphicon glyphicon-tags">&nbsp;{{ org.get_category_display }}</span><br>
+                                    <span class="glyphicon glyphicon-hand-right">&nbsp;点击量&nbsp;{{ org.click_num }}</span>
+                                  </div>
+                                </div>
+
+                                <button class="btn btn-success" id="jsRightBtn" style="width: 100px;margin-left: 80px">
+                                <span style="text-align: center;">
+                                    {% if org_favor %}已收藏{% else %}收藏{% endif %}
+                                </span>
+
+                                </button>
+                             </div>
+                          </div>
+                     </div>
+
+            </div>
+            </div>
+        </div>
+
+</section>
+
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+//收藏分享
+function add_fav(current_elem, fav_id, fav_type){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'orgs:add_favor'  %}",
+        data:{'fav_id':fav_id, 'fav_type':fav_type},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg == '用户未登录'){
+                    window.location.href="../../../templates/login.html";
+                }else{
+                    alert(data.msg)
+                }
+
+            }else if(data.status == 'success'){
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+
+$('#jsLeftBtn').on('click', function(){
+    add_fav($(this), {{ teacher.id }}, 2);
+});
+
+$('#jsRightBtn').on('click', function(){
+    add_fav($(this), {{ org.id }}, 3);
+});
+
+
+</script>
+{% endblock %}
+
+
+

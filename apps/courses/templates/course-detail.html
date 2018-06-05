@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% block title  %}课程详情 | 学习在线{% endblock %}
+
+{% block custom_css %}
+<style>
+.thumbnail{
+    margin-right: 20px!important;
+    margin-top: 10px!important;
+    width: 190px!important;
+    border: none;
+}
+</style>
+
+{% endblock %}
+{% block bread %}
+    <section>
+	<div class="wp">
+		<div class="crumbs">
+			<ul>
+				<li><a href="{% url 'homepage' %}">首页</a>></li>
+                <li><a href="{% url 'orgs:org_list' %}">公开课程</a>></li>
+				<li>课程详情</li>
+			</ul>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block content %}
+
+    {# 课程介绍与课程机构 #}
+    <section>
+	<div class="wp">
+		<div class="groupPurchase_detail detail">
+			<div class="toppro">
+				<div class="left">
+					<div class="picbox">
+						<div class="tb-booth tb-pic">
+							<img width="440" height="445" src="/media/{{ course.image }}" class="jqzoom" style="border-radius: 10px"/>
+						</div>
+
+					</div>
+					<div class="des">
+						<h1 title="django 从入门到精通体验开始了">{{ course.name }}</h1>
+						<span class="key">
+                            {{ course.description }}
+                        </span>
+						<div class="prize">
+							<span class="fl">难度：<i class="key">{{ course.get_degree_display }}</i></span>
+							<span class="fr">学习人数：{{ course.students_num }}</span>
+						</div>
+						<ul class="parameter">
+							<li><span class="pram word3">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长：</span><span class="desc_content">{{ course.learn_times }}</span></li>
+                            <li><span class="pram word3">章&nbsp;节&nbsp;数：</span><span class="desc_content">{{ course.chapter_set.all.count }}</span></li>
+                            <li><span class="pram word3">课程类别：</span><span class="desc_content">{{ course.category }}</span></li>
+							<li class="piclist"><span class="pram word4">学习用户：</span>
+                                {% for user in user_list %}
+                                <span class="pic"><img width="40" height="40" src="/media/{{ user.image }}"/></span>
+                                {% endfor %}
+							</li>
+						</ul>
+						<div class="btns">
+							<button class="btn btn-success" id="jsLeftBtn" style="width: 80px">
+                                <span style="margin-top: 200px">{% if course_favor %}
+                                    已收藏
+                                {% else %}
+                                    收藏
+                                {% endif %}</span>
+                            </button>
+                        <a style="color: white" href="{% url 'courses:course_videos' course.id %}">
+
+                                <button class="btn btn-danger">开始学习</button>
+                        </a>
+						</div>
+					</div>
+                    <div class="group-share-box">
+                        <div class="bdsharebuttonbox"
+                             data-text="django开始了"
+                             data-desc="我在#慕课网#发现了"
+                             data-comment=""
+                             data-url="/group/groupdetail/15/">
+                            <span class="fl">分享到：</span>
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                            <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+                            <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+                            <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+                            <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
+                            <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+                        </div>
+                    </div>
+				</div>
+
+				<div class="right">
+                    <div class="row">
+                    <div class="head">授课机构</div>
+                        <div class="thumbnail" style="margin-left:30px;height: 290px">
+                        <a href="{% url 'orgs:org_homepage' course.org.id %}">
+                            <img src="/media/{{ course.org.image }}" alt="...">
+                        </a>
+                          <div class="caption" style="font-size: 14px">
+                              <span class="glyphicon glyphicon-user"> 机构名：<span class="desc_content">{{ course.org.name }}</span></span><br>
+                              <span class="glyphicon glyphicon-tags"> 类 别：<span class="desc_content">{{ course.org.get_category_display }}</span></span><br>
+                            <span class="glyphicon glyphicon-hand-right"> 点击量：<span class="desc_content">{{ course.org.click_num }}</span></span><br>
+                            <span class="glyphicon glyphicon-facetime-video"> 课程数：<span class="desc_content">{{ course.org.course_set.all.count }}</span></span><br>
+                              <span class="glyphicon glyphicon-user"> 教师数：<span class="desc_content">{{ course.org.teacher_set.all.count }}</span></span><br>
+                              <span class="glyphicon glyphicon-map-marker"> 地 区：<span class="desc_content">{{ course.org.address }}</span></span><br>
+                          </div>
+                        </div>
+                  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+    {# 课程章节详情 #}
+    <section>
+	<div class="wp">
+		<div class="list groupPurchase_detail_pro">
+
+        {# 课程详情 #}
+			<div class="left layout">
+				<div class="head">
+					<ul class="tab_header">
+						<li class="active">课程详情</li>
+					</ul>
+				</div>
+				<div class="tab_cont tab_cont1">
+
+					<p>{{ course.detail }}</p>
+
+				</div>
+			</div>
+
+        {# 相关课程推荐 #}
+			<div class="right layout">
+                <div class="row">
+				<div class="head" style="width: 210px;margin-left: 15px">相关课程推荐</div>
+                {% ifequal related_course '' %}
+                {% else %}
+
+                    <div class="row" style="height: 200px">
+                        <div class="thumbnail" style="height: 100px;margin-left: 30px">
+                          <a target="_blank" href="{% url 'courses:course_detail' related_course.id %}">
+                              <img width="220" height="200" class="scrollLoading" src="/media/{{ related_course.image }}">
+                          </a>
+
+                          <div class="caption" style="text-align: center">
+                                <h4 class="">{{ related_course.name }}</h4>
+                                <span class="">学习时长(分钟)：<i class="key">{{ related_course.learn_times }}</i></span>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                {% endifequal %}
+
+			</div>
+
+		</div>
+	</div>
+    </section>
+
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+//收藏分享
+function add_fav(current_elem, fav_id, fav_type){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'orgs:add_favor' %}",
+        data:{'fav_id':fav_id, 'fav_type':fav_type},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg == '用户未登录'){
+                    window.location.href="../../../templates/login.html";
+                }else{
+                    alert(data.msg)
+                }
+
+            }else if(data.status == 'success'){
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+
+$('#jsLeftBtn').on('click', function(){
+    add_fav($(this), {{ course.id }}, 1);
+});
+
+$('#jsRightBtn').on('click', function(){
+    add_fav($(this), {{ course.org.id }}, 3);
+});
+
+
+</script>
+{% endblock %}
+
+
+

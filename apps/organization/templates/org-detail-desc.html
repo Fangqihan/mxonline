@@ -1,0 +1,19 @@
+{% extends 'org-detail-homepage.html' %}
+
+{% load static %}
+
+{% block title %}机构介绍 | 学习在线{% endblock %}
+
+{% block nav_name %}机构介绍{% endblock %}
+
+
+{% block content %}
+ <div class="right companycenter layout">
+    <div class="head">
+        <span >机构介绍</span>
+        <a class="green fr more" href="org-detail-desc.html">查看更多  >  </a>
+    </div>
+    <p style="padding: 20px">{{ org.description }}</p>
+</div>
+{% endblock %}
+

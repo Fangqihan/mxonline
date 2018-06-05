@@ -1,0 +1,74 @@
+{% extends 'org-detail-homepage.html' %}
+
+{% load static %}
+
+{% block title %}机构教师 | 学习在线{% endblock %}
+
+{% block nav_name %}机构讲师{% endblock %}
+
+
+{% block content %}
+<div class="right companycenter layout" >
+        <div class="head">
+            <span>机构讲师</span>
+        </div>
+
+        <div class="messagelist">
+            <div class=" butler_list butler-fav-box">
+              {% for teacher in all_teachers %}
+                  <hr>
+                <div class="media">
+                  <div class="media-left">
+                    <a href="{% url 'orgs:teacher_detail' teacher.id %}">
+                      <img class="media-object" src="/media/{{ teacher.image }}" alt="..." width="180" height="180">
+                    </a>
+                  </div>
+                  <div class="media-body">
+
+                    <div class="container" style="margin-top: 20px">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span>姓名：<span class="desc_content">{{ teacher.name }}</span></span>
+                            </div>
+                            <div class="col-md-5">
+                                <span>年龄：<span class="desc_content">{{ teacher.age }}岁</span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="second">工作年限：<span class="desc_content">{{ teacher.work_year }}</span>年</span>
+                            </div>
+                            <div class="col-md-5">
+                                <span>当前职位：<span class="desc_content">{{ teacher.work_position }}</span></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="second">就职公司：<span class="desc_content">{{ teacher.company }}</span></span>
+                            </div>
+                            <div class="col-md-5">
+                                <span>教学特点：<span class="desc_content">{{ teacher.introduction|truncatechars:'26' }}</span></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <span>主讲课程：</span>
+                                  {% for course in teacher.course_set.all|slice:'3' %}
+                                      <span class="" style="color: #37b16f">
+                                          <a href="{% url 'courses:course_detail' course.id %}">{{ course.name }}&nbsp;&nbsp;</a></span>
+                                  {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                  <hr>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

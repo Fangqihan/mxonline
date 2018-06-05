@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title  %}讲师列表 | 学习在线{% endblock %}
+{% block custom_css %}
+<style>
+
+{#　教师列表显示样式　#}
+.media img{
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+}
+.media-object{
+    margin-top: 0;
+    margin-left: 20px;
+}
+.media-body{
+{#    padding-top: 20px;#}
+}
+.media span{
+}
+.media li{
+    margin-bottom: 5px;
+}
+.media-left{
+    padding-right: 20px;
+}
+.thumbnail img{
+    width: 150px;
+    height: 150px;
+}
+.media-body .row{
+    margin-bottom: 10px;
+}
+.butler-num{
+    margin-right: 20px;
+}
+</style>
+{% endblock %}
+
+{% block bread %}
+    <section>
+        <div class="wp">
+            <ul  class="crumbs">
+                <li><a href="{% url 'homepage' %}">首页</a>></li>
+                <li>课程讲师</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+{% block content %}
+
+<section>
+<div class="wp butler_list_box list">
+
+{#    左侧内容区　#}
+	<div class='left'>
+		<div class="butler_list layout">
+			<div class="head">
+				<ul class="fl tab_header">
+					<li class="active"><a href="?sort=">全部</a> </li>
+					<li ><a href="?sort=hot">人气 &#8595;</a></li>
+				</ul>
+                <div class="fr butler-num">
+                    <span class="">共<span class="key">{{ teachers_page.object_list.count }}</span>人</span>
+                </div>
+			</div>
+
+            {% for teacher in teachers_page.object_list %}
+                <div class="media">
+                  <div class="media-left">
+                    <a href="{% url 'orgs:teacher_detail' teacher.id %}">
+                      <img class="media-object" src="/media/{{ teacher.image }}" alt="..." width="180" height="180">
+                    </a>
+                  </div>
+                  <div class="media-body">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span>姓名：<span class="desc_content">{{ teacher.name }}</span></span>
+                            </div>
+                            <div class="col-md-5">
+                                <span>年龄：<span class="desc_content">{{ teacher.age }}岁</span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="second">工作年限：<span class="desc_content">{{ teacher.work_year }}</span>年</span>
+                            </div>
+                            <div class="col-md-5">
+                                <span>当前职位：<span class="desc_content">{{ teacher.work_position }}</span></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="second">就职公司：<span class="desc_content">{{ teacher.company }}</span></span>
+                            </div>
+                            <div class="col-md-5">
+                                <span>教学特点：<span class="desc_content">{{ teacher.introduction|truncatechars:'26' }}</span></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <span>主讲课程：</span>
+                                  {% for course in teacher.course_set.all|slice:'3' %}
+                                      <span class="" style="color: #37b16f">
+                                          <a href="{% url 'courses:course_detail' course.id %}">{{ course.name }}&nbsp;&nbsp;</a></span>
+                                  {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <hr>
+            {% endfor %}
+
+		</div>
+
+    {#    分页#}
+        <nav aria-label="Page navigation">
+                <ul class="pagination">
+                {% load i18n %}
+                    {% if teachers_page.has_previous %}
+                        {# 有上一页就不显示这个 #}
+                        <li class="long"><a href="?{{ teachers_page.previous_page_number.querystring }}" > {% trans "上一页" %}</a></li>
+                    {% endif %}
+
+                    {% for page in teachers_page.pages %}
+                        {# 循环遍历每一页 #}
+                        {% if page %}
+                            {% ifequal page teachers_page.number %}
+                                {# 如果是当前页 #}
+                                <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                            {% else %}
+                                <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                            {% endifequal %}
+
+                        {% else %}
+                            <li class="none"><a href="">/static.</a></li>
+
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if teachers_page.has_next %}
+                        <li class="long"><a href="?{{ teachers_page.next_page_number.querystring }}" >{% trans "下一页" %}</a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+    </div>
+
+
+{#    右侧内容区域　#}
+    <div class="right layout">
+    <div class="row">
+        <div class="head"><p style="text-align: center">热门教师</p></div>
+         {% for teacher in hot_teachers %}
+        <div class="thumbnail">
+          <img src="/media/{{ teacher.image }}" alt="..." >
+          <div class="caption" style="font-size: 10px;color: #adadad;margin-left: 20px">
+            <span class="glyphicon glyphicon-user">姓名：{{ teacher.name }}</span>
+            <span class="glyphicon glyphicon-time">工作年限：{{ teacher.work_year }}</span>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+
+
+</div>
+
+</section>
+
+{% endblock %}
+
+
+
