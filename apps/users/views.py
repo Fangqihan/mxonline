@@ -36,12 +36,12 @@ class LoginView(View):
                 return redirect('/index/')
             else:
                 return render(request, 'login.html', {
-                    'msg':'用户名不存在',
+                    'msg': '用户名不存在',
                 })
         else:
             return render(request, 'login.html', {
                 'login_form': login_form,
-                'msg':'用户名或密码输入有误'
+                'msg': '用户名或密码输入有误'
             })
 
 
@@ -62,13 +62,13 @@ class HomePageView(View):
         else:
             all_recommended_courses = all_courses
 
-        if len(all_courses)> 6:  # 取前6位的课程显示
+        if len(all_courses) > 6:  # 取前6位的课程显示
             all_courses = all_courses[:6]
         return render(request, 'index.html', {
-            'all_orgs':all_orgs,
-            'all_courses':all_courses,
-            'all_recommended_courses':all_recommended_courses,
-            'banners':banners
+            'all_orgs': all_orgs,
+            'all_courses': all_courses,
+            'all_recommended_courses': all_recommended_courses,
+            'banners': banners
         })
 
 
@@ -79,9 +79,8 @@ class RegisterView(View):
     def get(self, request):
         register_form = RegisterForms()
         return render(request, 'register.html', {
-            'register_form':register_form,
+            'register_form': register_form,
         })
-
 
     def post(self, request):
         regitser_form = RegisterForms(request.POST, request.FILES)
@@ -105,14 +104,13 @@ class RegisterView(View):
         else:
             errors = regitser_form.errors
             print(errors)
-            return render(request, "register.html", {'register_form': regitser_form,'errors':errors})
-
+            return render(request, "register.html", {'register_form': regitser_form, 'errors': errors})
 
 
 class ActivateUserView(View):
     def get(self, request, code):
         email_record = EmailVerifyRecord.objects.filter(code=code)
-        if email_record:#传输过来的code是否是之前发送的
+        if email_record:  # 传输过来的code是否是之前发送的
             record = email_record[0]
             email = record.email
             user = UserProfile.objects.get(email=email)
@@ -127,7 +125,7 @@ class ActivateUserView(View):
 class MyBackend(object):
     def authenticate(self, request, username=None, password=None):
         try:
-            user = UserProfile.objects.get(Q(username=username)|Q(email=username)|Q(mobile=username))
+            user = UserProfile.objects.get(Q(username=username) | Q(email=username) | Q(mobile=username))
             if user.check_password(password):
                 return user
             else:
@@ -153,34 +151,24 @@ def active_success(request):
 class ForgetPwdView(View):
     def get(self, request):
         forget_form = ForgetPwdForms()
-        return render(request, 'forget_pwd.html',{
-            'forget_form':forget_form,
+        return render(request, 'forget_pwd.html', {
+            'forget_form': forget_form,
         })
 
     def post(self, request):
         forget_form = ForgetPwdForms(request.POST)
         if forget_form.is_valid():
-            email = forget_form.cleaned_data['email']
-            user_profile = UserProfile.objects.filter(Q(email=email)|Q(username=email))
-            if user_profile:
-                # 存在相关用户,跳转至密码重置页面
-                return render(request, 'password_reset.html', {
-                    'email':email,
-                })
-
-            # 不存在相关用户
-            return render(request, 'forget_pwd.html', {
-                'forget_form':forget_form,
-                'msg':'对不起，该邮箱未被注册'
+            username = forget_form.cleaned_data['username']
+            return render(request, 'password_reset.html', {
+                'forget_form': forget_form,
+                'username': username
             })
 
-        else:
-            errors = forget_form.errors
-            print(errors)
-            return render(request, 'forget_pwd.html', {
-                'forget_form':forget_form,
-                'msg': '您输入的邮箱或验证码格式有误'
-            })
+        errors = forget_form.errors
+        print(errors)
+        return render(request, 'forget_pwd.html', {
+            'forget_form': forget_form,
+        })
 
 
 class ResetPwdView(View):
@@ -191,28 +179,18 @@ class ResetPwdView(View):
         pwd_form = ResetPwdForms(request.POST)
 
         if pwd_form.is_valid():
-            if pwd_form.cleaned_data['password1'] != pwd_form.cleaned_data['password2']:
-                return render(request, 'password_reset.html', {
-                    "msg":"密码不一致",
-                })
+            username = request.POST.get('username')
+            user_profile = UserProfile.objects.filter(Q(email=username) | Q(username=username))
+            if user_profile:
+                user = user_profile.first()
+                user.password = make_password(pwd_form.cleaned_data['password1'])
+                user.save()
+                return redirect('/user/login/')
+            redirect('/user/forget_pwd/')
 
-            else:
-                #输入经过form的验证，且两次输入相同
-                if request.POST.get('email'):
-                    email = request.POST.get('email')
-                    user_profile = UserProfile.objects.get(Q(email=email)|Q(username=email))
-                    user_profile.password = make_password(pwd_form.cleaned_data['password1'])
-                    user_profile.save()
-                    return redirect('/user/login/')
-                else:
-                    return render(request, 'org_error.html')
-
-        else:
-            #密码输入有误
-            return render(request, 'password_reset.html', {
-                "msg": '密码至少要有六位数',
-            })
-
+        errors = pwd_form.errors
+        print(errors)
+        return render(request, 'password_reset.html', {'errors': errors})
 
 
 class UserCenterInfoView(View):
@@ -252,19 +230,21 @@ class UserCenterInfoView(View):
 
 
 class SendEmailCodeView(View):
-    #发送邮件验证码
+    # 发送邮件验证码
     def get(self, request):
         if request.user.is_authenticated:
             email = request.GET.get('email', '')
             if email:
                 user_profile_lst = UserProfile.objects.filter(email=email)
-                #查看邮件是否已被注册
+                # 查看邮件是否已被注册
                 if user_profile_lst:
-                    return HttpResponse(json.dumps({'status': 'failure', 'msg': '邮箱已注册'}), content_type='application/json')
+                    return HttpResponse(json.dumps({'status': 'failure', 'msg': '邮箱已注册'}),
+                                        content_type='application/json')
                 else:
-                    #邮箱未被注册，但是这里没有检查邮箱书写规范
-                    send_email(email, 'change_email') #在调用发送函数过程中已经将发送的验证码和邮箱信息保存进数据库了
-                    return HttpResponse(json.dumps({'status': 'success', 'msg': '邮箱已注册'}), content_type='application/json')
+                    # 邮箱未被注册，但是这里没有检查邮箱书写规范
+                    send_email(email, 'change_email')  # 在调用发送函数过程中已经将发送的验证码和邮箱信息保存进数据库了
+                    return HttpResponse(json.dumps({'status': 'success', 'msg': '邮箱已注册'}),
+                                        content_type='application/json')
 
             else:
                 return HttpResponse(json.dumps({'status': 'failure', 'msg': '请输入邮箱'}), content_type='application/json')
@@ -277,7 +257,7 @@ class ChangeEmailView(View):
     def post(self, request):
         if request.user.is_authenticated:
             change_email_form = ModifyEmailForm(request.POST)
-            if change_email_form.is_valid():    # 输入内容是否符合语法
+            if change_email_form.is_valid():  # 输入内容是否符合语法
                 code = change_email_form.cleaned_data.get('code', '')
                 email = change_email_form.cleaned_data.get('email', '')
                 record_lst = EmailVerifyRecord.objects.filter(email=email)
@@ -288,10 +268,12 @@ class ChangeEmailView(View):
                         user = request.user
                         user.email = email
                         user.save()
-                        return HttpResponse(json.dumps({'status': 'success', 'msg': '邮箱修改成功'}), content_type='application/json')
+                        return HttpResponse(json.dumps({'status': 'success', 'msg': '邮箱修改成功'}),
+                                            content_type='application/json')
                     else:
 
-                        return HttpResponse(json.dumps({'status': 'failure', 'msg': '验证码有误'}), content_type='application/json')
+                        return HttpResponse(json.dumps({'status': 'failure', 'msg': '验证码有误'}),
+                                            content_type='application/json')
 
                 return HttpResponse(json.dumps({'status': 'failure', 'msg': '邮件有误'}), content_type='application/json')
 
@@ -313,10 +295,12 @@ class ChangePwdView(View):
                     user = request.user
                     user.password = make_password(pwd1)
                     user.save()
-                    return HttpResponse(json.dumps({'status': 'success', 'msg': '修改成功'}), content_type='application/json')
+                    return HttpResponse(json.dumps({'status': 'success', 'msg': '修改成功'}),
+                                        content_type='application/json')
 
                 else:
-                    return HttpResponse(json.dumps({'status': 'failure', 'msg': '密码输入不一致'}), content_type='application/json')
+                    return HttpResponse(json.dumps({'status': 'failure', 'msg': '密码输入不一致'}),
+                                        content_type='application/json')
 
             else:
                 return HttpResponse(json.dumps({'status': 'failure', 'msg': '密码有误'}), content_type='application/json')
@@ -327,6 +311,7 @@ class ChangePwdView(View):
 
 class ImageUploadView(View):
     '''在用户中心修改用户图像'''
+
     def post(self, request):
         if request.user.is_authenticated:
             image_form = UploadImageForm(request.POST, request.FILES)
@@ -345,17 +330,17 @@ class ImageUploadView(View):
 
 
 class MyCourseView(LoginRequiredMixin, View):
-    #我的课程
+    # 我的课程
     def get(self, request):
         user = request.user
         user_courses = UserCourses.objects.filter(user=user)
         return render(request, 'usercenter-mycourse.html', {
-            'user_courses':user_courses
+            'user_courses': user_courses
         })
 
 
 class UserFavorCourseView(LoginRequiredMixin, View):
-    #用户收藏的课程
+    # 用户收藏的课程
     def get(self, request):
         user = request.user
         courses_lst = []
@@ -368,7 +353,7 @@ class UserFavorCourseView(LoginRequiredMixin, View):
                 pass
 
         return render(request, "usercenter-userfavor-course.html", {
-            'courses_lst':courses_lst
+            'courses_lst': courses_lst
 
         })
 
@@ -380,12 +365,12 @@ class UserFavorOrgsView(LoginRequiredMixin, View):
         user_favor_lst = UserFavorite.objects.filter(user=user, favor_type=3)
         for user_favor in user_favor_lst:
             id = user_favor.favor_id
-            if CourseOrg.objects.filter(id=id): #筛选出符合id的所有机构
+            if CourseOrg.objects.filter(id=id):  # 筛选出符合id的所有机构
                 orgs_lst.append(CourseOrg.objects.get(id=id))
             else:
                 pass
         return render(request, "usercenter-userfavor-orgs.html", {
-            'orgs_lst':orgs_lst,
+            'orgs_lst': orgs_lst,
 
         })
 
@@ -397,10 +382,10 @@ class UserFavorTeachersView(LoginRequiredMixin, View):
         user_favor_lst = UserFavorite.objects.filter(user=user, favor_type=2)
         for user_favor in user_favor_lst:
             id = user_favor.favor_id
-            if Teacher.objects.filter(id=id): #筛选出符合id的所有教师
+            if Teacher.objects.filter(id=id):  # 筛选出符合id的所有教师
                 teachers_lst.append(Teacher.objects.get(id=id))
         return render(request, "usercenter-userfavor-teachers.html", {
-            'teachers_lst':teachers_lst,
+            'teachers_lst': teachers_lst,
         })
 
 
@@ -422,9 +407,6 @@ class UserMessagesView(LoginRequiredMixin, View):
         user_msgs = paginator.page(page)
 
         return render(request, "usercenter-message.html", {
-            'user_msgs':user_msgs,
+            'user_msgs': user_msgs,
 
         })
-
-
-
