@@ -2,8 +2,9 @@ from django import template
 register = template.Library()
 
 
-@register.simple_tag
-def get_error(error_dict):
-    return error_dict.get('__all__')
+@register.filter
+def get_msg(error_dict):
+    if error_dict.get('__all__'):
+        return error_dict.get('__all__')[0]
 
 

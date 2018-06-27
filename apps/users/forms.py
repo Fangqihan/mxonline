@@ -48,6 +48,7 @@ class ForgetPwdForms(forms.Form):
 class ResetPwdForms(forms.Form):
     password1 = forms.CharField(min_length=6, max_length=30)
     password2 = forms.CharField(min_length=6, max_length=30)
+    username = forms.CharField(max_length=30)
 
     def clean(self):
         """密码一致性检测"""

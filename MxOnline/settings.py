@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'MxOnline.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'mxonline_db_w',  # 你要存储数据的库名，事先要创建之
+        'NAME': 'mxonline_db',  # 你要存储数据的库名，事先要创建之
         'USER': 'root',  # 数据库用户名
         'PASSWORD': 'abc123',  # 密码
         'HOST': 'localhost',  # 主机

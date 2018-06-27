@@ -190,7 +190,7 @@ class ResetPwdView(View):
 
         errors = pwd_form.errors
         print(errors)
-        return render(request, 'password_reset.html', {'errors': errors})
+        return render(request, 'password_reset.html', {'msg': errors})
 
 
 class UserCenterInfoView(View):
