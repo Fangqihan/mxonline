@@ -58,25 +58,7 @@ function getCookie(name) {
      return cookieValue;
  };
 
-//顶部搜索栏搜索方法
-function search_click(){
-    var type = $('#jsSelectOption').attr('data-value'),
-        keywords = $('#search_keywords').val(),
-        request_url = '';
-    if(keywords == ""){
-        return
-    }
-    if(type == "course"){
-        request_url = "/course/list?keywords="+keywords
 
-    }else if(type == "teacher"){
-        request_url = "/teacher/list?keywords="+keywords
-
-    }else if(type == "org"){
-        request_url = "/org/list?keywords="+keywords
-    }
-    window.location.href = request_url
-}
 
 //刷新验证码
 function refresh_captcha(event){
@@ -86,7 +68,6 @@ function refresh_captcha(event){
     });
     return false;
 }
-
 
 
 //找回密码表单提交
@@ -145,6 +126,7 @@ function find_password_form_submit(){
         }
     });
 }
+
 
 //手机注册发送手机验证码
 $('#jsSetNewPwdBtn').on('click', function(){
@@ -396,35 +378,26 @@ $(function() {
         $(this).find('.drop').stop(true,true).slideUp();
     });
 
-    //顶部搜索栏搜索按钮事件
-    $('#jsSelectOption').on('click', function(){
-        var $jsSelectMenu = $('#jsSelectMenu');
-        if($jsSelectMenu.css('display') == 'block') return;
-        $jsSelectMenu.addClass('dis');
-    });
-    $('#jsSelectMenu > li').on('click', function(){
-        var searchType = $(this).attr('data-value'),
-            searchName = $(this).text(),
-            $jsSelectOption = $('#jsSelectOption');
-        $jsSelectOption.attr('data-value',searchType).text(searchName);
-        $(this).parent().removeClass('dis');
-    });
-    $(document).on('click', function(e){
-        if(e.target != $('#jsSelectOption')[0] && e.target != $('#jsSelectMenu')[0]){
-            $('#jsSelectMenu').removeClass('dis');
-        }
-    });
+    // //顶部搜索栏搜索按钮事件
+    // $('#jsSelectOption').on('click', function(){
+    //     var $jsSelectMenu = $('#jsSelectMenu');
+    //     if($jsSelectMenu.css('display') == 'block') return;
+    //     $jsSelectMenu.addClass('dis');
+    // });
+    // $('#jsSelectMenu > li').on('click', function(){
+    //     var searchType = $(this).attr('data-value'),
+    //         searchName = $(this).text(),
+    //         $jsSelectOption = $('#jsSelectOption');
+    //     $jsSelectOption.attr('data-value',searchType).text(searchName);
+    //     $(this).parent().removeClass('dis');
+    // });
+    // $(document).on('click', function(e){
+    //     if(e.target != $('#jsSelectOption')[0] && e.target != $('#jsSelectMenu')[0]){
+    //         $('#jsSelectMenu').removeClass('dis');
+    //     }
+    // });
 
 
-    $('#jsSearchBtn').on('click',function(){
-        search_click()
-    });
-    //搜索表单键盘事件
-    $("#search_keywords").keydown(function(event){
-        if(event.keyCode == 13){
-             $('#jsSearchBtn').trigger('click');
-        }
-    });
 
     //input的focus和blur效果
 	$('.dialogbox .box input').focus(function(){

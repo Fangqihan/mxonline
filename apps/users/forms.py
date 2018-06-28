@@ -7,6 +7,9 @@ class LoginForms(forms.Form):
     username = forms.CharField(min_length=1, required=True, label='用户名', widget=forms.Textarea)
 
 
+
+
+
 from django.forms import ValidationError
 from users.models import UserProfile
 
@@ -48,12 +51,13 @@ class ForgetPwdForms(forms.Form):
 class ResetPwdForms(forms.Form):
     password1 = forms.CharField(min_length=6, max_length=30)
     password2 = forms.CharField(min_length=6, max_length=30)
-    username = forms.CharField(max_length=30)
+    # username = forms.CharField(max_length=30)
 
     def clean(self):
         """密码一致性检测"""
         if self.cleaned_data.get('password1', '') == self.cleaned_data.get('password2', ''):
             return self.cleaned_data
+
         else:
             raise ValidationError("密码不一致")
 
@@ -61,6 +65,15 @@ class ResetPwdForms(forms.Form):
 class ModifyEmailForm(forms.Form):
     email = forms.EmailField(max_length=30, min_length=3)
     code = forms.CharField(min_length=4, max_length=4)
+
+    # # 可以使用全局钩子验证
+    # def clean(self):
+    #     from apps.users.models import EmailVerifyRecord
+    #     if not EmailVerifyRecord.objects.filter(email=self.email, code=self.code,send_type='change_email'):
+    #         raise ValidationError('邮箱或验证码不匹配')
+    #     else:
+    #         return self.cleaned_data
+
 
 
 class UploadImageForm(forms.Form):

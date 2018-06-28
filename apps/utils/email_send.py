@@ -48,6 +48,3 @@ def send_email(email, send_type=""):
         if send_status:
             pass
 
-
-
-

@@ -34,8 +34,9 @@ function sendCodeChangeEmail($btn){
             $btn.removeAttr("disabled");
         }
     });
-
 }
+
+
 //个人资料邮箱修改
 function changeEmailSubmit($btn){
 var verify = verifyDialogSubmit(
@@ -74,6 +75,7 @@ var verify = verifyDialogSubmit(
         }
     });
 }
+
 
 $(function(){
     //个人资料修改密码
@@ -143,6 +145,9 @@ $(function(){
             {id: '#nick_name', tips: Dml.Msg.epNickName, require: true}
         ]
     );
+
+
+
     //保存个人资料
     $('#jsEditUserBtn').on('click', function(){
         var _self = $(this),
@@ -195,3 +200,5 @@ $(function(){
 
 
 });
+
+

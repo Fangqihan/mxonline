@@ -193,7 +193,9 @@ class ResetPwdView(View):
         return render(request, 'password_reset.html', {'msg': errors})
 
 
+
 class UserCenterInfoView(View):
+
     def get(self, request):
         if request.user.is_authenticated:
             return render(request, 'usercenter-info.html', {
@@ -206,11 +208,13 @@ class UserCenterInfoView(View):
         if request.user.is_authenticated:
             nick_name = request.POST.get('nick_name', '')
 
+            # 转换
             birthday = request.POST.get('birthday', '')
             birthday = birthday.replace('年', '-').replace('月', '-').replace('日', '')
             date_str = birthday
             fmt = '%Y-%m-%d'
             birthday = datetime.strptime(date_str, fmt).date()
+
             gender = request.POST.get('gender', '')
             address = request.POST.get('address', '')
             mobile = request.POST.get('mobile', '')
@@ -245,7 +249,6 @@ class SendEmailCodeView(View):
                     send_email(email, 'change_email')  # 在调用发送函数过程中已经将发送的验证码和邮箱信息保存进数据库了
                     return HttpResponse(json.dumps({'status': 'success', 'msg': '邮箱已注册'}),
                                         content_type='application/json')
-
             else:
                 return HttpResponse(json.dumps({'status': 'failure', 'msg': '请输入邮箱'}), content_type='application/json')
 
@@ -253,10 +256,12 @@ class SendEmailCodeView(View):
             return render(request, 'login.html')
 
 
+
 class ChangeEmailView(View):
     def post(self, request):
         if request.user.is_authenticated:
             change_email_form = ModifyEmailForm(request.POST)
+
             if change_email_form.is_valid():  # 输入内容是否符合语法
                 code = change_email_form.cleaned_data.get('code', '')
                 email = change_email_form.cleaned_data.get('email', '')
@@ -284,22 +289,17 @@ class ChangeEmailView(View):
             return render(request, 'login.html')
 
 
+
 class ChangePwdView(View):
     def post(self, request):
         if request.user.is_authenticated:
             change_email_form = ResetPwdForms(request.POST)
             if change_email_form.is_valid():
                 pwd1 = change_email_form.cleaned_data.get('password1', '')
-                pwd2 = change_email_form.cleaned_data.get('password2', '')
-                if pwd1 == pwd2:
-                    user = request.user
-                    user.password = make_password(pwd1)
-                    user.save()
-                    return HttpResponse(json.dumps({'status': 'success', 'msg': '修改成功'}),
-                                        content_type='application/json')
-
-                else:
-                    return HttpResponse(json.dumps({'status': 'failure', 'msg': '密码输入不一致'}),
+                user = request.user
+                user.password = make_password(pwd1)
+                user.save()
+                return HttpResponse(json.dumps({'status': 'success', 'msg': '修改成功'}),
                                         content_type='application/json')
 
             else:
@@ -307,6 +307,7 @@ class ChangePwdView(View):
 
         else:
             return render(request, 'login.html')
+
 
 
 class ImageUploadView(View):
