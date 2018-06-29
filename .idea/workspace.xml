@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="705e580f-f45e-4956-898f-879c1125b473" name="Default" comment="" />
+    <list default="true" id="705e580f-f45e-4956-898f-879c1125b473" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/courses/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/courses/templates/course-comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/templates/course-comment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/courses/templates/course_videos.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/templates/course_videos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/courses/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/muke/common-less.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/muke/common-less.css" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +43,13 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mxonline_db: schema" type="c314c289:MysqlImplModel$Schema" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="mxonline_db@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="mxonline_db: schema" type="c314c289:MysqlImplModel$Schema" />
+        <item name="用户课程评论: table" type="98d5ac3d:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -46,7 +60,62 @@
     <favorites_list name="MxOnline" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/courses/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8">
+              <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="course_videos.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/courses/templates/course_videos.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8">
+              <caret line="68" column="116" selection-start-line="68" selection-start-column="116" selection-end-line="68" selection-end-column="116" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/courses/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="230" column="59" selection-start-line="230" selection-start-column="59" selection-end-line="230" selection-end-column="59" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="course-comment.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/courses/templates/course-comment.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-18">
+              <caret line="219" column="39" selection-start-line="219" selection-start-column="39" selection-end-line="219" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/courses/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -58,10 +127,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>class=&quot;form-p&quot;</find>
-      <find>reset</find>
-      <find>forget_pwd</find>
-      <find>reset_pwd</find>
       <find>修改头</find>
       <find>username</find>
       <find>avatarUp</find>
@@ -88,6 +153,10 @@
       <find>search</find>
       <find>搜索</find>
       <find>aler</find>
+      <find>评论</find>
+      <find>资料</find>
+      <find>.l</find>
+      <find>js-pl-submit</find>
     </findStrings>
     <replaceStrings>
       <replace>学习在线</replace>
@@ -107,11 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/apps/courses/models.py" />
-        <option value="$PROJECT_DIR$/templates/header_copy.html" />
-        <option value="$PROJECT_DIR$/apps/courses/templates/course-comment.html" />
-        <option value="$PROJECT_DIR$/apps/courses/templates/course-play.html" />
-        <option value="$PROJECT_DIR$/apps/courses/templates/course_videos.html" />
         <option value="$PROJECT_DIR$/apps/users/templates/usercenter-message.html" />
         <option value="$PROJECT_DIR$/apps/users/templates/usercenter-mycourse.html" />
         <option value="$PROJECT_DIR$/apps/users/templates/usercenter-userfavor-.msgs.html" />
@@ -120,7 +184,6 @@
         <option value="$PROJECT_DIR$/utils/my_paginator.py" />
         <option value="$PROJECT_DIR$/apps/utils/test.html" />
         <option value="$PROJECT_DIR$/apps/utils/my_paginator.py" />
-        <option value="$PROJECT_DIR$/apps/courses/views.py" />
         <option value="$PROJECT_DIR$/read" />
         <option value="$PROJECT_DIR$/static/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/static/css/bootstrap.min.css" />
@@ -158,6 +221,12 @@
         <option value="$PROJECT_DIR$/apps/users/views.py" />
         <option value="$PROJECT_DIR$/static/js/deco-common.js" />
         <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/apps/courses/templates/course_videos.html" />
+        <option value="$PROJECT_DIR$/apps/courses/urls.py" />
+        <option value="$PROJECT_DIR$/apps/courses/models.py" />
+        <option value="$PROJECT_DIR$/static/css/muke/common-less.css" />
+        <option value="$PROJECT_DIR$/apps/courses/templates/course-comment.html" />
+        <option value="$PROJECT_DIR$/apps/courses/views.py" />
       </list>
     </option>
   </component>
@@ -184,7 +253,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -200,12 +268,31 @@
             <path>
               <item name="mxonline" type="b2602c69:ProjectViewProjectNode" />
               <item name="mxonline" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="courses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mxonline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mxonline" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="courses" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mxonline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mxonline" type="462c0819:PsiDirectoryNode" />
               <item name="MxOnline" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mxonline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mxonline" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,7 +347,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
+      <option name="port" value="8001" />
       <option name="host" value="" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
@@ -316,22 +403,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50192803" side_tool="true" weight="0.32971507" />
       <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.49807197" weight="0.32971507" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34724092" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.53162855" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32948717" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.275441" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4974293" weight="0.65948856" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12789203" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4974293" weight="0.3229308" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16388175" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" weight="0.14138818" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32904884" />
+      <window_info anchor="right" id="Database" order="3" weight="0.11632391" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34599727" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.27763158" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info active="true" anchor="bottom" id="manage.py@MxOnline" order="7" weight="0.44911805" />
@@ -341,26 +428,27 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Database Console" order="9" weight="0.32974428" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32904884" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.36742935" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="manage.py@MxOnline" order="8" weight="0.4024226" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1336761" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="manage.py@MxOnline" order="8" weight="0.4024226" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36742935" />
       <window_info anchor="right" id="Data View" order="4" weight="0.32935718" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32904884" />
       <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32166892" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4974293" weight="0.39973083" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5025707" side_tool="true" weight="0.30551818" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32839838" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.32974428" />
@@ -409,34 +497,11 @@
           <line>211</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/apps/courses/views.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="36" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/img/coffee.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/weixi_icon2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/feature6.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/footlogo.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/img/background.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/img/face-a.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/django/forms/forms.py" />
     <entry file="file://$PROJECT_DIR$/apps/users/templatetags/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -501,13 +566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8">
           <caret line="172" column="25" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e0eb7e7d-853b-4cc5-9924-09fcf4a3d4d9/schema/mxonline_db/table/用户信息">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -625,16 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4">
           <caret line="381" selection-start-line="381" selection-end-line="381" />
-          <folding>
-            <element signature="e#41#1016#0" />
-            <element signature="n#!!block;n#zy_Countdown#0" />
-            <element signature="n#!!block;n#getCookie#0" />
-            <element signature="n#!!block;n#refresh_captcha#0" />
-            <element signature="n#!!block;n#find_password_form_submit#0" />
-            <element signature="e#5109#6698#0" />
-            <element signature="n#!!block;n#favPraise#0" />
-            <element signature="n#!!block;n#getCookie#1" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -646,16 +694,6 @@
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#select#0;n#div#0;n#form#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/courses/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -687,20 +725,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/courses/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/courses/templates/course-play.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e0eb7e7d-853b-4cc5-9924-09fcf4a3d4d9/schema/mxonline_db/table/教师">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/courses/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e0eb7e7d-853b-4cc5-9924-09fcf4a3d4d9/schema/mxonline_db/table/用户信息">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e0eb7e7d-853b-4cc5-9924-09fcf4a3d4d9/schema/mxonline_db/table/用户课程评论">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/muke/common-less.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/courses/templates/course_videos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="68" column="116" selection-start-line="68" selection-start-column="116" selection-end-line="68" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/courses/templates/course-comment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="219" column="39" selection-start-line="219" selection-start-column="39" selection-end-line="219" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/courses/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/courses/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="230" column="59" selection-start-line="230" selection-start-column="59" selection-end-line="230" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

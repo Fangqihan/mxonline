@@ -229,7 +229,6 @@ class CourseCommentView(View):
                 'course': course,
                 'all_comments': all_comments,
                 'recommended_courses': recommended_courses,
-
             })
 
         else:

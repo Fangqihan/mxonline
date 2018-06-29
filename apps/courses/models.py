@@ -18,7 +18,7 @@ class Course(models.Model):
     click_num = models.IntegerField(default=0, verbose_name='点击数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='课程添加时间')
     teacher = models.ForeignKey(Teacher, verbose_name="授课教师", blank=True, null=True)
-    recommend = models.BooleanField(default=False, verbose_name='是否推荐',max_length=2)
+    recommend = models.BooleanField(default=False, verbose_name='是否推荐', max_length=2)
     has_favor = models.BooleanField(default=False, verbose_name='是否收藏')
     notice = models.CharField(default='', verbose_name='课程须知', max_length=200)
     is_banner = models.BooleanField(default=False, verbose_name='广告课程')
@@ -26,8 +26,7 @@ class Course(models.Model):
     class Meta:
         verbose_name = '课程'
         verbose_name_plural = verbose_name
-        db_table='课程'
-
+        db_table = '课程'
 
     def __str__(self):
         return self.name
@@ -41,12 +40,10 @@ class Chapter(models.Model):
     class Meta:
         verbose_name = '章节'
         verbose_name_plural = verbose_name
-        db_table='章节'
-
+        db_table = '章节'
 
     def __str__(self):
         return self.name
-
 
 
 class Video(models.Model):
@@ -58,8 +55,7 @@ class Video(models.Model):
     class Meta:
         verbose_name = '视频'
         verbose_name_plural = verbose_name
-        db_table='视频'
-
+        db_table = '视频'
 
     def __str__(self):
         return self.name
@@ -73,18 +69,7 @@ class CourseResource(models.Model):
     class Meta:
         verbose_name = '课程资源下载'
         verbose_name_plural = verbose_name
-        db_table='课程资源下载'
-
+        db_table = '课程资源下载'
 
     def __str__(self):
         return self.name
-
-
-
-
-
-
-
-
-
-

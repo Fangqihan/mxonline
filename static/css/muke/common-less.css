@@ -30,6 +30,8 @@ a:active {
 }
 .l {
     float: left;
+    margin-right: 15px;
+    color: green;
 }
 .r {
     float: right;
