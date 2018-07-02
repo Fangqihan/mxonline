@@ -17,6 +17,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(1, os.path.join(BASE_DIR, 'static'))
+sys.path.insert(2, os.path.join(BASE_DIR, 'extra_apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -45,7 +46,10 @@ INSTALLED_APPS = [
     'organization',
     'users',
     'captcha',
-    'pure_pagination'
+    'pure_pagination',
+    'crispy_forms',
+    'xadmin',
+    'DjangoUeditor'
 ]
 
 MIDDLEWARE = [
@@ -93,14 +97,15 @@ WSGI_APPLICATION = 'MxOnline.wsgi.application'
 #     }
 # }
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'mxonline_db',  # 你要存储数据的库名，事先要创建之
-        'USER': 'root',  # 数据库用户名
-        'PASSWORD': 'abc123',  # 密码
-        'HOST': 'localhost',  # 主机
-        'PORT': '3306',  # 数据库使用的端口
+        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+        'NAME': 'mxonline_db',                  # 你要存储数据的库名，事先要创建之
+        'USER': 'root',                         # 数据库用户名
+        'PASSWORD': 'abc123',                   # 密码
+        'HOST': 'localhost',                    # 主机
+        'PORT': '3306',                         # 数据库使用的端口
     }
 }
 
@@ -149,6 +154,7 @@ if DEBUG:
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
+# 设置覆盖默认的User模型，其值引用一个自定义的模型
 AUTH_USER_MODEL = 'users.UserProfile'
 
 EMAIL_HOST = "smtp.qq.com"
@@ -173,3 +179,21 @@ LOGIN_URL = '/users/login/'
 handler404 = 'operation.views.page_not_found'
 
 handler500 = 'operation.views.page_error'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

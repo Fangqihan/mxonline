@@ -8,7 +8,7 @@ from organization.models import CourseOrg, Teacher
 
 class UserAsk(models.Model):
     name = models.CharField(max_length=10)
-    mobile = models.CharField(max_length=10, verbose_name='联系电话')
+    mobile = models.CharField(max_length=11, verbose_name='联系电话')
     course = models.CharField(max_length=20, verbose_name='咨询课程')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 

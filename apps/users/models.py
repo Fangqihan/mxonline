@@ -18,14 +18,14 @@ class UserProfile(AbstractUser):
         db_table='用户信息'
 
     def __str__(self):
-        return  self.username
-
-    def get_unread_msg_num(self):
-        from operation.models import UserMessages
-        if UserMessages.objects.filter(user=self, has_read=False):
-            return len(UserMessages.objects.filter(user=self, has_read=False))
-        else:
-            return 0
+        return self.username
+    #
+    # def get_unread_msg_num(self):
+    #     from operation.models import UserMessages
+    #     if UserMessages.objects.filter(user=self, has_read=False):
+    #         return len(UserMessages.objects.filter(user=self, has_read=False))
+    #     else:
+    #         return 0
 
 
 class EmailVerifyRecord(models.Model):

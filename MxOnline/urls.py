@@ -20,9 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from organization.views import TeacherListView
 from django.views.static import serve
+import xadmin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
+    # url(r'^xadmin/', xadmin.site.urls),
     url(r'^index/$', HomePageView.as_view(), name='homepage'),
     url(r'^$', HomePageView.as_view(), name='homepage'),
     url(r'^captcha/', include('captcha.urls')),
@@ -33,6 +35,8 @@ urlpatterns = [
     url(r'^operation/', include('operation.urls', namespace='operation')),
     url(r'^teacher/list/$', TeacherListView.as_view(), name='teacher_list'),
     # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    url(r'^ueditor/',include('DjangoUeditor.urls' )),
 ]
 
 if settings.DEBUG:

@@ -2,12 +2,18 @@ from datetime import datetime
 
 from django.db import models
 from organization.models import CourseOrg, Teacher
+from DjangoUeditor.models import UEditorField
 
 
 class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name='课程名')
     description = models.CharField(max_length=100, verbose_name='课程描述')
-    detail = models.TextField(verbose_name='课程详情')
+    # detail = models.TextField(verbose_name='课程详情')
+
+    # 配置ueditor
+    detail = UEditorField(verbose_name='课程详情', width=600, height=300, imagePath="courses/ueditor/",
+                            filePath="courses/ueditor/",default='')
+
     degree = models.CharField(choices=(('CJ', '初级'), ('ZJ', '中级'), ('GJ', '高级')), max_length=10)
     learn_times = models.IntegerField(default=0, verbose_name='学习时长(分钟)')
     students_num = models.IntegerField(default=0, verbose_name='学习人数')
@@ -30,6 +36,16 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_chap_num(self):
+        return self.chapter_set.all().count()
+
+    get_chap_num.short_description='章节数'
+
+    def my_link(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<a href="https://www.baidu.com">链接</a>')
+    my_link.short_description='章节数'
 
 
 class Chapter(models.Model):

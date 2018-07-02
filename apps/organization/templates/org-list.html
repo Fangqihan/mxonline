@@ -187,34 +187,37 @@ $('.user_input').click(function () {
 });
 
 // 提交咨询信息
-    $(function(){
-        $('#jsStayBtn').on('click', function(){
-            $.ajax({
-                type: "POST",
-                url:"{% url 'operation:user_ask' %}",
-                data:$('#jsStayForm').serialize(),
-                success: function(data) {
-                    if(data.status == 'success'){
-                        $('#jsStayForm')[0].reset();
-                        alert("提交成功")
-                    }else if(data.status == 'fail'){
-                        if(data.msg.course_name){
-                            console.log(data.msg.course_name[0])
-                            $('#course_name').val(data.msg.course_name[0]).addClass('error_tips')
-                        }
-                        if(data.msg.mobile){
-                            console.log(data.msg.mobile[0])
-                            $('#mobile').val(data.msg.mobile[0]).addClass('error_tips')
-                        }
-                        if(data.msg.name){
-                            console.log(data.msg.name[0])
-                            $('#name').val(data.msg.name[0]).addClass('error_tips')
-                        }
+$(function(){
+    $('#jsStayBtn').on('click', function(){
+        $.ajax({
+            type: "POST",
+            url:"{% url 'operation:user_ask' %}",
+            data:$('#jsStayForm').serialize(),
+            success: function(data) {
+                if(data.status == 'success'){
+                    $('#jsStayForm')[0].reset();
+                    alert("提交成功")
+                }else if(data.status == 'fail'){
+                    if(data.msg.error){
+                        $('#jsStayForm')[0].reset(); // 重置输入框
+                         alert(data.msg.error)  // 相同信息重复提交
+                    }
+                    if(data.msg.course_name){
+                        {# 若信息验证失败，显示错误信息 #}
+                        $('#course_name').val(data.msg.course_name[0]).addClass('error_tips')
+                    }
+                    if(data.msg.mobile){
+                        $('#mobile').val(data.msg.mobile[0]).addClass('error_tips')
+                    }
+                    if(data.msg.name){
+                        $('#name').val(data.msg.name[0]).addClass('error_tips')
                     }
                 }
-            });
+            }
         });
-    })
+    });
+})
+
 </script>
 
 {% endblock %}

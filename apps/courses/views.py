@@ -4,12 +4,13 @@ from .models import Course, Video
 from operation.models import UserCourses, UserFavorite, CourseComments
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from pure_pagination import Paginator,PageNotAnInteger,EmptyPage
+from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
 
 import json
 
+
 class CourseListView(View):
-    def get(self,request):
+    def get(self, request):
         sort = request.GET.get('sort', '')
         all_courses = Course.objects.all()
         recommend_courses = all_courses.filter(recommend=True)[:2]
@@ -18,7 +19,9 @@ class CourseListView(View):
         # 取出关键词，若果有关键词，说明用使用了搜索功能，我们按照关键词对所有course对象进行筛选
         keywords = request.GET.get('keywords', '')
         if keywords:
-            all_courses = Course.objects.filter(Q(name__icontains=keywords)|Q(description__icontains=keywords)|Q(detail__icontains=keywords)|Q(degree__icontains=keywords)|Q(category__icontains=keywords))
+            all_courses = Course.objects.filter(
+                Q(name__icontains=keywords) | Q(description__icontains=keywords) | Q(detail__icontains=keywords) | Q(
+                    degree__icontains=keywords) | Q(category__icontains=keywords))
         if sort == 'hot':
             all_courses = Course.objects.all().order_by('-click_num')
         elif sort == 'students':
@@ -34,9 +37,9 @@ class CourseListView(View):
         # 此对象包含当前页的对象列表，在前端通过course_page.object_list取出
         course_page = p.page(page_num)
         return render(request, 'course-list.html', {
-            'course_page':course_page,
-            'recommend_courses':recommend_courses,
-            'sort':sort,
+            'course_page': course_page,
+            'recommend_courses': recommend_courses,
+            'sort': sort,
 
         })
 
@@ -78,8 +81,8 @@ class CourseDetailView(View):
                 'course': course,
                 'user_list': user_list,
                 'related_course': related_course,
-                'course_favor':course_favor,
-                'org_favor':org_favor,
+                'course_favor': course_favor,
+                'org_favor': org_favor,
 
             })
 
@@ -92,15 +95,15 @@ class CourseVideoView(View):
     def get(self, request, course_id):
         if request.user.is_authenticated:
             course_lst = Course.objects.filter(id=int(course_id))
-            if course_lst:#判断课程是否存在
+            if course_lst:  # 判断课程是否存在
 
                 course = Course.objects.get(id=int(course_id))
-                chapter_lst = course.chapter_set.all()  #取出当前课程的所有章节对象
-                recommended_courses = []    # 先初始化推荐课程列表,待后续使用
+                chapter_lst = course.chapter_set.all()  # 取出当前课程的所有章节对象
+                recommended_courses = []  # 先初始化推荐课程列表,待后续使用
 
-                user_courses_lst = UserCourses.objects.filter(course=course)    # 筛选出相同课程的 用户课程对象
+                user_courses_lst = UserCourses.objects.filter(course=course)  # 筛选出相同课程的 用户课程对象
                 if len(user_courses_lst) >= 1:
-                    users_lst = [user_course.user for user_course in user_courses_lst]  #取出学过该课程的所有用户对象
+                    users_lst = [user_course.user for user_course in user_courses_lst]  # 取出学过该课程的所有用户对象
                     for user in users_lst:
                         user_courses = UserCourses.objects.filter(user=user)
                         for user_course in user_courses:
@@ -128,13 +131,13 @@ class CourseVideoView(View):
 
                 return render(request, 'course_videos.html', {
                     'course': course,
-                    'chapter_lst':chapter_lst,
-                    'recommended_courses':recommended_courses,
+                    'chapter_lst': chapter_lst,
+                    'recommended_courses': recommended_courses,
 
                 })
 
             else:
-                #所查询的课程不存在
+                # 所查询的课程不存在
                 return render(request, 'course_not_exist.html')
 
         else:
@@ -172,7 +175,7 @@ class VideoPlayView(View):
                     'course': course,
                     'chapter_lst': chapter_lst,
                     'recommended_courses': recommended_courses,
-                    'video':video,
+                    'video': video,
 
                 })
 
@@ -182,11 +185,10 @@ class VideoPlayView(View):
                 })
 
         else:
-            #对应id的视频不存在
+            # 对应id的视频不存在
             return render(request, 'video_not_exist.html', {
 
             })
-
 
 
 class CourseCommentView(View):
@@ -236,7 +238,7 @@ class CourseCommentView(View):
             return render(request, 'course_not_exist.html')
 
 
-class AddCommentView(LoginRequiredMixin,View):
+class AddCommentView(LoginRequiredMixin, View):
     # 必须在登录的情况下发表评论
     def post(self, request):
         comments = request.POST.get('comments', '')
@@ -248,7 +250,7 @@ class AddCommentView(LoginRequiredMixin,View):
             course_comment.course = course
             course_comment.comment = comments
             course_comment.save()
-            return HttpResponse(json.dumps({'status': 'success', 'msg':'评论提交成功'}), content_type='application/json')
+            return HttpResponse(json.dumps({'status': 'success', 'msg': '评论提交成功'}), content_type='application/json')
 
         else:
             return render(request, 'course_not_exist.html')

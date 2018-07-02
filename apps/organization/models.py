@@ -43,7 +43,6 @@ class CourseOrg(models.Model):
         return self.course_set.all().count()
 
 
-
 class Teacher(models.Model):
     name = models.CharField(verbose_name='教师姓名', max_length=20)
     image = models.ImageField(verbose_name='教师图片', max_length=100, upload_to='teacher/%Y/%m')

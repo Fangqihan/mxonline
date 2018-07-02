@@ -19,8 +19,8 @@ class UserAskView(View):
             user_ask = UserAsk.objects.filter(name=name, mobile=mobile, course=course_name)
 
             if user_ask:
-                msg ={}
-                msg['name'] = '对不起，你已经提交过相同的问题'
+                msg={}
+                msg['error'] = '对不起，你已经提交过相同的问题'
                 return HttpResponse(json.dumps({'status':'fail', 'msg':msg}),
                                     content_type='application/json')
 
