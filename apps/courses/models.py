@@ -1,15 +1,14 @@
 from datetime import datetime
-
 from django.db import models
 from organization.models import CourseOrg, Teacher
 from DjangoUeditor.models import UEditorField
+from django.utils.safestring import mark_safe
 
 
 class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name='课程名')
     description = models.CharField(max_length=100, verbose_name='课程描述')
     # detail = models.TextField(verbose_name='课程详情')
-
     # 配置ueditor
     detail = UEditorField(verbose_name='课程详情', width=600, height=300, imagePath="courses/ueditor/",
                             filePath="courses/ueditor/",default='')
@@ -43,7 +42,6 @@ class Course(models.Model):
     get_chap_num.short_description='章节数'
 
     def my_link(self):
-        from django.utils.safestring import mark_safe
         return mark_safe('<a href="https://www.baidu.com">链接</a>')
     my_link.short_description='章节数'
 
