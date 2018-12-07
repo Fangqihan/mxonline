@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import sys
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -70,7 +71,6 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'courses', 'templates'),
                  os.path.join(BASE_DIR, 'organization', 'templates'),
-
                  ]
         ,
         'APP_DIRS': True,
@@ -101,9 +101,9 @@ WSGI_APPLICATION = 'MxOnline.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
-        'NAME': 'mxonline_db',                  # 你要存储数据的库名，事先要创建之
+        'NAME': 'mx_db',                        # 你要存储数据的库名，事先要创建之
         'USER': 'root',                         # 数据库用户名
-        'PASSWORD': 'abc123',                   # 密码
+        'PASSWORD': '',                         # 密码
         'HOST': 'localhost',                    # 主机
         'PORT': '3306',                         # 数据库使用的端口
     }
